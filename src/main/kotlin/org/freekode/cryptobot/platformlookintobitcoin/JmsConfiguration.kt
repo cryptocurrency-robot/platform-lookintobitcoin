@@ -3,7 +3,7 @@ package org.freekode.cryptobot.platformlookintobitcoin
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.apache.activemq.ActiveMQConnectionFactory
-import org.freekode.cryptobot.platformlookintobitcoin.domain.event.PlatformEvent
+import org.freekode.cryptobot.genericplatformlibrary.domain.event.PlatformEvent
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value

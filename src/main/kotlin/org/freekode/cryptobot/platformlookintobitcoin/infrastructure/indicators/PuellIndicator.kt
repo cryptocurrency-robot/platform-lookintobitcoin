@@ -1,7 +1,7 @@
 package org.freekode.cryptobot.platformlookintobitcoin.infrastructure.indicators
 
-import org.freekode.cryptobot.platformlookintobitcoin.domain.IndicatorId
-import org.freekode.cryptobot.platformlookintobitcoin.domain.PlatformIndicator
+import org.freekode.cryptobot.genericplatformlibrary.domain.IndicatorId
+import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformIndicator
 import org.freekode.cryptobot.platformlookintobitcoin.infrastructure.lookintobitcoin.ChartPointDTO
 import org.freekode.cryptobot.platformlookintobitcoin.infrastructure.lookintobitcoin.LookintobitcoinClient
 import org.freekode.cryptobot.platformlookintobitcoin.infrastructure.schedule.JobScheduler

@@ -1,11 +1,11 @@
 package org.freekode.cryptobot.platformlookintobitcoin.app
 
-import org.freekode.cryptobot.platformlookintobitcoin.domain.IndicatorId
+import org.freekode.cryptobot.genericplatformlibrary.domain.IndicatorId
+import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformEventSender
+import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformId
+import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformIndicatorRegistry
+import org.freekode.cryptobot.genericplatformlibrary.domain.event.PlatformEvent
 import org.freekode.cryptobot.platformlookintobitcoin.domain.MarketPair
-import org.freekode.cryptobot.platformlookintobitcoin.domain.PlatformEventSender
-import org.freekode.cryptobot.platformlookintobitcoin.domain.PlatformId
-import org.freekode.cryptobot.platformlookintobitcoin.domain.PlatformIndicatorRegistry
-import org.freekode.cryptobot.platformlookintobitcoin.domain.event.PlatformEvent
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -26,8 +26,10 @@ class IndicatorStreamService(
     fun subscribeToIndicator(indicatorId: IndicatorId, pair: MarketPair) {
         logger.info("Subscribing for $pair")
         platformIndicatorRegistry.getIndicatorImplementation(indicatorId).openStream(pair) {
-            val platformEvent = PlatformEvent(platformId.value, it.pair.name, it.indicatorId.value,
-                it.value.toPlainString(), it.timestamp / 1000)
+            val platformEvent = PlatformEvent(
+                platformId.value, it.pair.getName(), it.indicatorId.value,
+                it.value.toPlainString(), it.timestamp / 1000
+            )
             platformEventSender.send(platformEvent)
         }
     }

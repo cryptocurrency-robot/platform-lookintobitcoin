@@ -1,8 +1,9 @@
 package org.freekode.cryptobot.platformlookintobitcoin.infrastructure.indicators
 
-import org.freekode.cryptobot.platformlookintobitcoin.domain.IndicatorId
+import org.freekode.cryptobot.genericplatformlibrary.domain.GenericMarketPair
+import org.freekode.cryptobot.genericplatformlibrary.domain.IndicatorId
+import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformResponse
 import org.freekode.cryptobot.platformlookintobitcoin.domain.MarketPair
-import org.freekode.cryptobot.platformlookintobitcoin.domain.PlatformResponse
 import org.freekode.cryptobot.platformlookintobitcoin.infrastructure.lookintobitcoin.ChartPointDTO
 import org.freekode.cryptobot.platformlookintobitcoin.infrastructure.schedule.JobScheduler
 import org.quartz.TriggerKey
@@ -22,25 +23,26 @@ abstract class LookintobitcoinIndicator(
 
     abstract fun getLatestChartPoint(): ChartPointDTO
 
-    fun openStream(pair: MarketPair, callback: (PlatformResponse) -> Unit) {
-        validateStream(pair)
+    fun openStream(pair: GenericMarketPair, callback: (PlatformResponse) -> Unit) {
+        val marketPair = MarketPair.valueOf(pair.getName())
+        validateStream(marketPair)
 
         val triggerKey = TriggerKey(getIndicatorId().value + "-trigger")
-        val platformCallback = getCallback(pair, callback)
-        jobScheduler.scheduleSimpleCallbackJob(triggerKey, updateTime, platformCallback)
+        val platformCallback = getCallback(marketPair, callback)
+        jobScheduler.scheduleJob(triggerKey, updateTime, platformCallback)
 
         cache.put(pair, triggerKey)
     }
 
-    fun closeStream(pair: MarketPair) {
-        val triggerKey = cache.get(pair)?.get() as TriggerKey
-        jobScheduler.unscheduleSimpleCallbackJob(triggerKey)
+    fun closeStream(pair: GenericMarketPair) {
+        val marketPair = MarketPair.valueOf(pair.getName())
+        val triggerKey = cache.get(marketPair)?.get() as TriggerKey
+        jobScheduler.unscheduleJob(triggerKey)
     }
 
     private fun getCallback(marketPair: MarketPair, callback: (PlatformResponse) -> Unit): () -> Unit {
         return {
-            val latestPoint = getLatestChartPoint();
-
+            val latestPoint = getLatestChartPoint()
             val platformResponse =
                 PlatformResponse(marketPair, getIndicatorId(), latestPoint.value, getTimestamp(latestPoint.date))
             callback.invoke(platformResponse)

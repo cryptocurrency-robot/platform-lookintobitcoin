@@ -1,6 +1,5 @@
 package org.freekode.cryptobot.platformlookintobitcoin.infrastructure.lookintobitcoin
 
-import org.freekode.cryptobot.platformlookintobitcoin.domain.IndicatorId
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
@@ -18,7 +17,6 @@ class LookintobitcoinClient {
     companion object {
         private const val NUPL_COLUMN_NAME = "Relative Unrealised Profit/Loss"
         private const val PUELL_COLUMN_NAME = "Puell Multiple"
-        private val NUPL_INDICATOR_ID = IndicatorId("nupl")
     }
 
     private final val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")

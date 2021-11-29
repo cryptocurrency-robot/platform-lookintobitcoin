@@ -1,6 +1,16 @@
 package org.freekode.cryptobot.platformlookintobitcoin.domain
 
+import org.freekode.cryptobot.genericplatformlibrary.domain.GenericMarketPair
 
-enum class MarketPair(val title: String) {
-    BTC_USD("BTCUSD")
+
+enum class MarketPair(private val title: String) : GenericMarketPair {
+    BTC_USD("BTCUSD");
+
+    override fun getName(): String {
+        return name
+    }
+
+    override fun getTitle(): String {
+        return title
+    }
 }
