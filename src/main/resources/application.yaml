@@ -1,0 +1,15 @@
+platform.name: 'lookintobitcoin'
+
+indicators:
+  nupl:
+    update-time-seconds: 60
+  puell:
+    update-time-seconds: 60
+
+event:
+  broker-url: 'tcp://localhost:61616'
+  topic:
+    platform: 'platform-update'
+
+org.quartz.jobStore.class: org.quartz.simpl.RAMJobStore
+spring.quartz.job-store-type: memory

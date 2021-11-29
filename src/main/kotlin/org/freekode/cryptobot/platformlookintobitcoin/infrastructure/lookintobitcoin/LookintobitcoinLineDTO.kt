@@ -1,4 +1,4 @@
-package org.freekode.cryptobot.platformlookintobitcoin.infrastructure
+package org.freekode.cryptobot.platformlookintobitcoin.infrastructure.lookintobitcoin
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 

@@ -1,16 +1,9 @@
 package org.freekode.cryptobot.platformlookintobitcoin.domain
 
+interface PlatformIndicator {
+    fun getIndicatorId(): IndicatorId
 
-enum class PlatformIndicator(
-    val indicatorName: IndicatorName,
-    val platformSpecificName: String
-) {
-    NUPL(IndicatorName("NUPL"), "Relative Unrealised Profit/Loss"),
-    PUELL_MULTIPLE(IndicatorName("Puell Multiple"), "Puell Multiple");
+    fun openStream(pair: MarketPair, callback: (PlatformResponse) -> Unit)
 
-    companion object {
-        fun getByIndicatorName(indicatorName: IndicatorName): PlatformIndicator {
-            return values().first { it.indicatorName == indicatorName }
-        }
-    }
+    fun closeStream(pair: MarketPair)
 }

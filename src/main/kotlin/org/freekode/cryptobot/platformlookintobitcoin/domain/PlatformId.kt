@@ -1,4 +1,4 @@
 package org.freekode.cryptobot.platformlookintobitcoin.domain
 
 
-data class PlatformName(val value: String)
+data class PlatformId(val value: String)

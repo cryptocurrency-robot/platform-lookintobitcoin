@@ -1,4 +1,4 @@
 package org.freekode.cryptobot.platformlookintobitcoin.domain
 
 
-data class IndicatorName(val internalValue: String)
+data class IndicatorId(val value: String)
