@@ -1,5 +1,6 @@
 package org.freekode.cryptobot.platformlookintobitcoin
 
+import org.freekode.cryptobot.genericplatformlibrary.EnableGenericPlatform
 import org.freekode.cryptobot.genericplatformlibrary.domain.PlatformId
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.PropertySources
 
 
 @SpringBootApplication
+@EnableGenericPlatform
 @PropertySources(
     PropertySource("classpath:application.yaml"),
     PropertySource(value = ["file:\${user.home}/platform-binance.properties"], ignoreResourceNotFound = true)
